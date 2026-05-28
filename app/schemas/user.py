@@ -8,6 +8,7 @@ class UserRegister(BaseModel):
     password: str
     full_name: str
     phone: Optional[str] = None
+    address: Optional[str] = None
     company_name: Optional[str] = None
 
 
@@ -21,6 +22,7 @@ class UserResponse(BaseModel):
     email: str
     full_name: Optional[str]
     phone: Optional[str]
+    address: Optional[str]
     company_name: Optional[str]
     is_active: bool
     is_verified: bool

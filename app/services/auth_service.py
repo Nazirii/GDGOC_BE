@@ -15,6 +15,7 @@ def register_user(data: UserRegister, db: Session) -> User:
         email=data.email,
         full_name=data.full_name,
         phone=data.phone,
+        address=data.address,
         password_hash=hash_password(data.password),
     )
     db.add(user)
