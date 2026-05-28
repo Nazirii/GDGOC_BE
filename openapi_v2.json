@@ -1,0 +1,983 @@
+{
+  "uuid": "b96c587a-cf56-4b85-8d8a-b428ba53a1cd",
+  "lastMigration": 33,
+  "name": "Apparel Review Analysis API",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3000,
+  "hostname": "",
+  "folders": [],
+  "routes": [
+    {
+      "uuid": "8ec4da6c-fb49-4dfc-902f-dd75daa3aa67",
+      "type": "http",
+      "documentation": "Register",
+      "method": "post",
+      "endpoint": "api/auth/register",
+      "responses": [
+        {
+          "uuid": "3f237382-bf86-420a-a9b0-cd6c0a14a58a",
+          "body": "{\n  \"id\": 1,\n  \"email\": \"user@example.com\",\n  \"full_name\": \"Alya Putri\",\n  \"phone\": \"08123456789\",\n  \"company_name\": \"Rajut Nusantara\",\n  \"created_at\": \"2026-05-27T12:49:43.994311\",\n  \"updated_at\": \"2026-05-27T12:49:43.994311\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "a4a9d9f0-8ad8-4dd2-8d0f-9625c4b32346",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "d70d00dc-6310-4741-aed7-48785ece968e",
+      "type": "http",
+      "documentation": "Login",
+      "method": "post",
+      "endpoint": "api/auth/login",
+      "responses": [
+        {
+          "uuid": "1bc75724-4ffc-42f5-9e0d-4c22c4e67a41",
+          "body": "{\n  \"access_token\": \"jwt_access_token\",\n  \"refresh_token\": \"jwt_refresh_token\",\n  \"token_type\": \"bearer\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c1c171ba-76f9-454e-9a01-ca82c9bf4f82",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "dc36eb43-dca7-4c50-a02f-e13c7b7a378c",
+      "type": "http",
+      "documentation": "Logout",
+      "method": "post",
+      "endpoint": "api/auth/logout",
+      "responses": [
+        {
+          "uuid": "244f0898-9486-4af9-9917-b82d4cde2a0f",
+          "body": "{\n  \"message\": \"Logout berhasil\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4ec5753d-7cd2-469d-937b-6e227adbf21b",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "25181139-b5e1-47f4-aaf0-926a4716e98c",
+      "type": "http",
+      "documentation": "Me",
+      "method": "get",
+      "endpoint": "api/auth/me",
+      "responses": [
+        {
+          "uuid": "753c1984-a90c-440a-b72d-a53b146e6fea",
+          "body": "{\n  \"id\": 1,\n  \"email\": \"user@example.com\",\n  \"full_name\": \"Alya Putri\",\n  \"phone\": \"08123456789\",\n  \"company_name\": \"Rajut Nusantara\",\n  \"created_at\": \"2026-05-27T12:49:43.994311\",\n  \"updated_at\": \"2026-05-27T12:49:43.994311\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "987226bc-ad15-4f3a-8300-0feb46d39ff6",
+      "type": "http",
+      "documentation": "List Analys Products",
+      "method": "get",
+      "endpoint": "api/analys_products/",
+      "responses": [
+        {
+          "uuid": "11b5f4df-4ba8-4bb6-a875-93ce1fc5c540",
+          "body": "[\n  {\n    \"id\": 12,\n    \"user_id\": 1,\n    \"category\": \"pakaian\",\n    \"product_name\": \"Baju Rajut Wanita\",\n    \"description\": \"Baju rajut wanita dengan gaya casual-premium, cocok untuk pasar Jepang dan Eropa. Fokus pada kenyamanan, tekstur halus, dan warna netral yang mudah dipadukan.\",\n    \"image_url\": null,\n    \"status\": \"pending\",\n    \"created_at\": \"2026-05-27T12:49:43.994311\",\n    \"updated_at\": \"2026-05-27T12:49:43.994311\",\n    \"message\": \"Analisis sedang diproses, silakan cek kembali nanti\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "cf6d942f-9948-41a7-b831-d121eb737603",
+      "type": "http",
+      "documentation": "Create Analys Product",
+      "method": "post",
+      "endpoint": "api/analys_products/",
+      "responses": [
+        {
+          "uuid": "89cb1e3a-6c2f-4b7f-b957-206c18b63ecb",
+          "body": "{\n  \"id\": 12,\n  \"user_id\": 1,\n  \"category\": \"pakaian\",\n  \"product_name\": \"Baju Rajut Wanita\",\n  \"description\": \"Baju rajut wanita dengan gaya casual-premium, cocok untuk pasar Jepang dan Eropa. Fokus pada kenyamanan, tekstur halus, dan warna netral yang mudah dipadukan.\",\n  \"image_url\": null,\n  \"status\": \"pending\",\n  \"created_at\": \"2026-05-27T12:49:43.994311\",\n  \"updated_at\": \"2026-05-27T12:49:43.994311\",\n  \"message\": \"Analisis sedang diproses, silakan cek kembali nanti\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "66f8dd0e-155d-46a1-8d8a-3af5926e7257",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "0b005c24-b158-41fd-93c2-384e0b122663",
+      "type": "http",
+      "documentation": "Get Analys Product",
+      "method": "get",
+      "endpoint": "api/analys_products/:analys_product_id",
+      "responses": [
+        {
+          "uuid": "761740d3-078d-49bc-92ce-0f8050f33244",
+          "body": "{\n  \"id\": 12,\n  \"user_id\": 1,\n  \"category\": \"pakaian\",\n  \"product_name\": \"Baju Rajut Wanita\",\n  \"description\": \"Baju rajut wanita dengan gaya casual-premium, cocok untuk pasar Jepang dan Eropa. Fokus pada kenyamanan, tekstur halus, dan warna netral yang mudah dipadukan.\",\n  \"image_url\": null,\n  \"status\": \"done\",\n  \"created_at\": \"2026-05-27T12:49:43.994311\",\n  \"updated_at\": \"2026-05-27T12:50:10.123456\",\n  \"report\": {\n    \"meta\": {\n      \"version\": \"1.0\",\n      \"generated_at\": \"2026-05-27T12:50:10Z\",\n      \"analysis_status\": \"ready\",\n      \"analys_product_id\": 12,\n      \"product_count\": 3\n    },\n    \"summary\": {\n      \"title\": \"Baju Rajut Wanita\",\n      \"subtitle\": \"Analisis tren konsumen dan peluang ekspor untuk knitwear casual-premium\",\n      \"recommended_market\": {\n        \"primary\": \"Jepang\",\n        \"alternatives\": [\"Korea Selatan\", \"Eropa\"]\n      },\n      \"export_readiness\": {\n        \"score\": 84,\n        \"label\": \"siap\",\n        \"note\": \"Produk memiliki potensi tinggi karena kombinasi tekstur, warna netral, dan kenyamanan yang cocok untuk pasar urban.\"\n      }\n    },\n    \"sections\": [\n      {\n        \"type\": \"brainstorm\",\n        \"title\": \"Saran BrainS\",\n        \"items\": [\n          {\n            \"id\": \"brainstorm-1\",\n            \"title\": \"Baju rajut Anda kuat di sisi kenyamanan\",\n            \"content\": \"Pasar merespons positif pada knitwear yang ringan, hangat, dan punya siluet simpel.\"\n          }\n        ]\n      },\n      {\n        \"type\": \"sentiment_breakdown\",\n        \"title\": \"Analisis Sentimen\",\n        \"items\": [\n          { \"aspect\": \"Tekstur\", \"value\": 0.91 },\n          { \"aspect\": \"Kenyamanan\", \"value\": 0.88 },\n          { \"aspect\": \"Warna\", \"value\": 0.76 }\n        ]\n      },\n      {\n        \"type\": \"seasonality\",\n        \"title\": \"Musim Permintaan\",\n        \"series\": [\n          { \"month\": \"Jan\", \"value\": 18 },\n          { \"month\": \"Feb\", \"value\": 20 },\n          { \"month\": \"Mar\", \"value\": 26 },\n          { \"month\": \"Apr\", \"value\": 35 },\n          { \"month\": \"Mei\", \"value\": 42 },\n          { \"month\": \"Jun\", \"value\": 30 }\n        ],\n        \"note\": \"Permintaan meningkat saat transisi musim dan cuaca dingin.\"\n      },\n      {\n        \"type\": \"favorite_colors\",\n        \"title\": \"Warna Favorit\",\n        \"items\": [\n          { \"name\": \"Cream\", \"value\": 0.41 },\n          { \"name\": \"Beige\", \"value\": 0.34 },\n          { \"name\": \"Olive\", \"value\": 0.25 }\n        ]\n      },\n      {\n        \"type\": \"popular_comments\",\n        \"title\": \"Komentar Populer\",\n        \"items\": [\"hangat\", \"lembut\", \"simple\", \"mudah dipadukan\"]\n      },\n      {\n        \"type\": \"pricing_reference\",\n        \"title\": \"Referensi Harga\",\n        \"items\": [\n          { \"tier\": \"Eksklusif\", \"price_range\": \"Rp350rb - Rp520rb\" },\n          { \"tier\": \"Umum\", \"price_range\": \"Rp180rb - Rp280rb\" }\n        ],\n        \"note\": \"Segmen premium cocok untuk knitwear dengan finishing rapi dan warna netral.\"\n      },\n      {\n        \"type\": \"opportunities\",\n        \"title\": \"Celah Peluang\",\n        \"items\": [\n          {\n            \"id\": \"opp-1\",\n            \"title\": \"Knitwear warna netral\",\n            \"content\": \"Fokus pada warna cream dan beige untuk memperkuat kesan premium dan mudah dipadu.\"\n          },\n          {\n            \"id\": \"opp-2\",\n            \"title\": \"Versi layering\",\n            \"content\": \"Buat varian yang cocok dipakai layering untuk memperluas segmentasi pasar urban.\"\n          }\n        ]\n      }\n    ],\n    \"sources\": {\n      \"products\": [\n        { \"product_id\": 101, \"name\": \"Baju Rajut A\" },\n        { \"product_id\": 102, \"name\": \"Baju Rajut B\" },\n        { \"product_id\": 103, \"name\": \"Baju Rajut C\" }\n      ],\n      \"insight_version\": \"2026-05-27\"\n    }\n  },\n  \"design_references\": [\n    {\n      \"id\": 1,\n      \"analys_product_id\": 12,\n      \"title\": \"Soft Minimal Knit\",\n      \"description\": \"Gaya rajut lembut dengan warna cream, cocok untuk tampilan minimalis modern.\",\n      \"image_url\": \"https://example.com/images/soft-minimal-knit.jpg\",\n      \"tags\": [\"cream\", \"minimal\", \"soft texture\"],\n      \"sort_order\": 0,\n      \"created_at\": \"2026-05-27T12:50:10.123456\",\n      \"updated_at\": \"2026-05-27T12:50:10.123456\"\n    },\n    {\n      \"id\": 2,\n      \"analys_product_id\": 12,\n      \"title\": \"Urban Cozy Layer\",\n      \"description\": \"Inspirasi knitwear untuk layering style urban dengan warna beige dan olive.\",\n      \"image_url\": \"https://example.com/images/urban-cozy-layer.jpg\",\n      \"tags\": [\"beige\", \"layering\", \"urban\"],\n      \"sort_order\": 1,\n      \"created_at\": \"2026-05-27T12:50:10.123456\",\n      \"updated_at\": \"2026-05-27T12:50:10.123456\"\n    }\n  ],\n  \"message\": null\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "967e62bc-efbd-4bbf-8cf2-c2fb8c80e07b",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "47b32616-0c8f-46d5-b40f-8d7bc56b88eb",
+      "type": "http",
+      "documentation": "Delete Product",
+      "method": "delete",
+      "endpoint": "api/analys_products/:analys_product_id",
+      "responses": [
+        {
+          "uuid": "fe8ddf2e-9c81-4d8d-b0bc-712077a26081",
+          "body": "{\n  \"message\": \"Produk dihapus\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "aab16f6a-4351-4341-b557-5109eeb5fb4b",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "ad882df4-6837-45d8-952f-6dedbe68df55",
+      "type": "http",
+      "documentation": "List Design References",
+      "method": "get",
+      "endpoint": "api/analys_products/:analys_product_id/design-references",
+      "responses": [
+        {
+          "uuid": "b5de7f21-cdea-45cc-bf5b-18ff0dbef4d6",
+          "body": "[\n  {\n    \"id\": 1,\n    \"analys_product_id\": 12,\n    \"title\": \"Soft Minimal Knit\",\n    \"description\": \"Gaya rajut lembut dengan warna cream, cocok untuk tampilan minimalis modern.\",\n    \"image_url\": \"https://example.com/images/soft-minimal-knit.jpg\",\n    \"tags\": [\"cream\", \"minimal\", \"soft texture\"],\n    \"sort_order\": 0,\n    \"created_at\": \"2026-05-27T12:50:10.123456\",\n    \"updated_at\": \"2026-05-27T12:50:10.123456\"\n  },\n  {\n    \"id\": 2,\n    \"analys_product_id\": 12,\n    \"title\": \"Urban Cozy Layer\",\n    \"description\": \"Inspirasi knitwear untuk layering style urban dengan warna beige dan olive.\",\n    \"image_url\": \"https://example.com/images/urban-cozy-layer.jpg\",\n    \"tags\": [\"beige\", \"layering\", \"urban\"],\n    \"sort_order\": 1,\n    \"created_at\": \"2026-05-27T12:50:10.123456\",\n    \"updated_at\": \"2026-05-27T12:50:10.123456\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "c385766e-8a34-4728-aa78-2988b6941cd4",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "84d9e5c2-4217-4185-bfdb-07278e33a553",
+      "type": "http",
+      "documentation": "Create Design Reference",
+      "method": "post",
+      "endpoint": "api/analys_products/:analys_product_id/design-references",
+      "responses": [
+        {
+          "uuid": "ce4b957e-249a-44e7-abb4-b15c8e86f1ef",
+          "body": "{\n  \"id\": 1,\n  \"analys_product_id\": 12,\n  \"title\": \"Soft Minimal Knit\",\n  \"description\": \"Gaya rajut lembut dengan warna cream, cocok untuk tampilan minimalis modern.\",\n  \"image_url\": \"https://example.com/images/soft-minimal-knit.jpg\",\n  \"tags\": [\"cream\", \"minimal\", \"soft texture\"],\n  \"sort_order\": 0,\n  \"created_at\": \"2026-05-27T12:50:10.123456\",\n  \"updated_at\": \"2026-05-27T12:50:10.123456\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cfdee91a-e370-41df-826e-1d252c221c1b",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "57427efb-b9d7-4f6c-a932-c32c8060a44f",
+      "type": "http",
+      "documentation": "Analyze Product",
+      "method": "post",
+      "endpoint": "api/reviews/:product_id/analyze",
+      "responses": [
+        {
+          "uuid": "f09ac9b8-7523-4e68-ab10-043ab29fd2b2",
+          "body": "{\n  \"message\": \"Analisis dijadwalkan (coming soon)\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "cdebed22-a2ef-42c0-b01d-8e17102b3cdd",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "bb5df541-95f9-4865-8812-af7c2321d688",
+      "type": "http",
+      "documentation": "List Sessions",
+      "method": "get",
+      "endpoint": "api/chat/sessions",
+      "responses": [
+        {
+          "uuid": "d382162b-8c10-43dc-a56c-74449756f2e8",
+          "body": "[\n  {\n    \"id\": 99,\n    \"user_id\": 1,\n    \"product_id\": null,\n    \"title\": \"Diskusi Baju Rajut\",\n    \"created_at\": \"2026-05-27T12:50:10.123456\",\n    \"updated_at\": \"2026-05-27T12:50:10.123456\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "78336ea7-7fa3-4259-aa94-792f9c2994b1",
+      "type": "http",
+      "documentation": "Create Session",
+      "method": "post",
+      "endpoint": "api/chat/sessions",
+      "responses": [
+        {
+          "uuid": "22d0222b-1ffb-4c8f-9477-bee5aa8ebb36",
+          "body": "{\n  \"id\": 99,\n  \"title\": \"Diskusi Baju Rajut\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "4ce73d57-49db-4c15-a4f4-456546d013ee",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "c876f4a7-e055-4c86-9dab-11d0c4407182",
+      "type": "http",
+      "documentation": "Get Messages",
+      "method": "get",
+      "endpoint": "api/chat/sessions/:session_id/messages",
+      "responses": [
+        {
+          "uuid": "daf55af9-3dc6-47f8-8959-9c51b52057d8",
+          "body": "[\n  {\n    \"id\": 1,\n    \"session_id\": 99,\n    \"role\": \"user\",\n    \"content\": \"Bisa bantu kasih saran style yang lebih premium?\",\n    \"token_count\": null,\n    \"created_at\": \"2026-05-27T12:50:15.000000\"\n  },\n  {\n    \"id\": 2,\n    \"session_id\": 99,\n    \"role\": \"assistant\",\n    \"content\": \"Fokus ke warna netral dan tekstur halus untuk kesan premium.\",\n    \"token_count\": null,\n    \"created_at\": \"2026-05-27T12:50:16.000000\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "988a0212-2463-4b7c-b728-4c6ab94954c2",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "00e57a79-5c51-4c28-bb71-b416a0ef8f51",
+      "type": "http",
+      "documentation": "Send Message",
+      "method": "post",
+      "endpoint": "api/chat/sessions/:session_id/send",
+      "responses": [
+        {
+          "uuid": "9f5587b9-3c50-4024-a982-1cbf2a67c8f7",
+          "body": "{\n  \"reply\": \"Kamu bisa arahkan ke warna cream atau beige dengan tekstur rajut yang lebih rapi untuk memberi kesan premium.\",\n  \"image_url\": \"https://example.com/generated/baju-rajut-01.png\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        },
+        {
+          "uuid": "f27c0924-916d-45c9-a86d-24e67b88569a",
+          "body": "{\n  \"detail\": [\n    {\n      \"loc\": [\n        \"\"\n      ],\n      \"msg\": \"\",\n      \"type\": \"\",\n      \"input\": \"\",\n      \"ctx\": {}\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 422,
+          "label": "Validation Error",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": false,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    },
+    {
+      "uuid": "2e16b301-7e17-4740-a63d-395f801e7b68",
+      "type": "http",
+      "documentation": "Health",
+      "method": "get",
+      "endpoint": "health",
+      "responses": [
+        {
+          "uuid": "9b0bec88-b8c5-47e8-8f47-0b101ed4f9f4",
+          "body": "{\n  \"status\": \"ok\"\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "Successful Response",
+          "headers": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true,
+          "crudKey": "id",
+          "callbacks": []
+        }
+      ],
+      "responseMode": null,
+      "streamingMode": null,
+      "streamingInterval": 0
+    }
+  ],
+  "rootChildren": [
+    {
+      "type": "route",
+      "uuid": "8ec4da6c-fb49-4dfc-902f-dd75daa3aa67"
+    },
+    {
+      "type": "route",
+      "uuid": "d70d00dc-6310-4741-aed7-48785ece968e"
+    },
+    {
+      "type": "route",
+      "uuid": "dc36eb43-dca7-4c50-a02f-e13c7b7a378c"
+    },
+    {
+      "type": "route",
+      "uuid": "25181139-b5e1-47f4-aaf0-926a4716e98c"
+    },
+    {
+      "type": "route",
+      "uuid": "987226bc-ad15-4f3a-8300-0feb46d39ff6"
+    },
+    {
+      "type": "route",
+      "uuid": "cf6d942f-9948-41a7-b831-d121eb737603"
+    },
+    {
+      "type": "route",
+      "uuid": "0b005c24-b158-41fd-93c2-384e0b122663"
+    },
+    {
+      "type": "route",
+      "uuid": "47b32616-0c8f-46d5-b40f-8d7bc56b88eb"
+    },
+    {
+      "type": "route",
+      "uuid": "ad882df4-6837-45d8-952f-6dedbe68df55"
+    },
+    {
+      "type": "route",
+      "uuid": "84d9e5c2-4217-4185-bfdb-07278e33a553"
+    },
+    {
+      "type": "route",
+      "uuid": "57427efb-b9d7-4f6c-a932-c32c8060a44f"
+    },
+    {
+      "type": "route",
+      "uuid": "bb5df541-95f9-4865-8812-af7c2321d688"
+    },
+    {
+      "type": "route",
+      "uuid": "78336ea7-7fa3-4259-aa94-792f9c2994b1"
+    },
+    {
+      "type": "route",
+      "uuid": "c876f4a7-e055-4c86-9dab-11d0c4407182"
+    },
+    {
+      "type": "route",
+      "uuid": "00e57a79-5c51-4c28-bb71-b416a0ef8f51"
+    },
+    {
+      "type": "route",
+      "uuid": "2e16b301-7e17-4740-a63d-395f801e7b68"
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": [],
+  "callbacks": []
+}

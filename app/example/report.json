@@ -1,0 +1,101 @@
+{
+  "meta": {
+    "version": "1.0",
+    "generated_at": "2026-05-25T10:00:00Z",
+    "analysis_status": "ready",
+    "analys_product_id": 12,
+    "product_count": 3
+  },
+  "summary": {
+    "title": "Tas Anyaman Bali",
+    "subtitle": "Analisis tren konsumen dan peluang ekspor",
+    "recommended_market": {
+      "primary": "Amerika Serikat",
+      "alternatives": ["Jepang", "Eropa"]
+    },
+    "export_readiness": {
+      "score": 82,
+      "label": "siap",
+      "note": "Potensi tinggi karena keselarasan material dan tren."
+    }
+  },
+  "sections": [
+    {
+      "type": "brainstorm",
+      "title": "Saran BrainS",
+      "items": [
+        {
+          "title": "Tas anyaman Anda sangat potensial",
+          "content": "Estetika 94% dan material 88%..."
+        }
+      ]
+    },
+    {
+      "type": "sentiment_breakdown",
+      "title": "Analisis Sentimen",
+      "items": [
+        { "aspect": "Estetika", "value": 0.94 },
+        { "aspect": "Material", "value": 0.88 },
+        { "aspect": "Kemasan", "value": 0.72 }
+      ]
+    },
+    {
+      "type": "seasonality",
+      "title": "Musim Permintaan",
+      "series": [
+        { "month": "Jan", "value": 12 },
+        { "month": "Feb", "value": 18 },
+        { "month": "Mar", "value": 24 },
+        { "month": "Apr", "value": 40 },
+        { "month": "Mei", "value": 44 },
+        { "month": "Jun", "value": 28 }
+      ],
+      "note": "Permintaan memuncak April–Mei."
+    },
+    {
+      "type": "favorite_colors",
+      "title": "Warna Favorit",
+      "items": [
+        { "name": "Earth Brown", "value": 0.42 },
+        { "name": "Natural Cream", "value": 0.35 },
+        { "name": "Sage", "value": 0.23 }
+      ]
+    },
+    {
+      "type": "popular_comments",
+      "title": "Komentar Populer",
+      "items": ["Bahan katun", "Kemasan cantik", "Bagus", "Bentuk unik"]
+    },
+    {
+      "type": "pricing_reference",
+      "title": "Referensi Harga",
+      "items": [
+        { "tier": "Eksklusif", "price_range": "Rp1.1jt - Rp1.4jt" },
+        { "tier": "Umum", "price_range": "Rp280rb - Rp440rb" }
+      ],
+      "note": "Produk premium diuntungkan oleh kemasan handcraft."
+    },
+    {
+      "type": "opportunities",
+      "title": "Celah Peluang",
+      "items": [
+        {
+          "title": "Kemasan cantik musim panas",
+          "content": "Naikkan skor kemasan 72%..."
+        },
+        {
+          "title": "Sentuhan katun sage",
+          "content": "Naikkan 23% peminat warna sage..."
+        }
+      ]
+    }
+  ],
+  "sources": {
+    "products": [
+      { "product_id": 101, "name": "Tas Anyaman A" },
+      { "product_id": 102, "name": "Tas Anyaman B" },
+      { "product_id": 103, "name": "Tas Anyaman C" }
+    ],
+    "insight_version": "2026-05-25"
+  }
+}
