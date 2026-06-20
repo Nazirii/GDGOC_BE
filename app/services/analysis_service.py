@@ -1,7 +1,5 @@
 import asyncio
-import importlib
 import json
-import os
 import re
 from datetime import datetime
 from typing import Any, Dict, List, Optional
@@ -13,23 +11,9 @@ from app.models.design_reference import DesignReference
 from app.models.product import AnalysProduct, Product, ScrapeJob
 from app.models.review import Insight, Report, Review, Sentence
 from app.schemas.product import AnalysProductCreate, DesignReferenceCreate
-
-APIFY_DEFAULT_PRODUCTS_ACTOR = os.getenv(
-    "APIFY_AMAZON_PRODUCTS_ACTOR_ID",
-    "apify/amazon-product-scraper",
-)
-APIFY_DEFAULT_REVIEWS_ACTOR = os.getenv(
-    "APIFY_AMAZON_REVIEWS_ACTOR_ID",
-    "apify/amazon-reviews-scraper",
-)
-NER_MODEL_NAME = os.getenv("NER_MODEL_NAME", "distilbert-base-uncased")
-SENTIMENT_MODEL_NAME = os.getenv(
-    "SENTIMENT_MODEL_NAME",
-    "nlptown/bert-base-multilingual-uncased-sentiment",
-)
-
-_NER_PIPELINE = None
-_SENTIMENT_PIPELINE = None
+from app.services.ml.apify_service import scrape_amazon_products, scrape_amazon_reviews
+from app.services.ml.ner_service import NER_MODEL_NAME, extract_ner_entities
+from app.services.ml.sentiment_service import SENTIMENT_MODEL_NAME, analyze_review_sentiment
 
 
 def _json_default(value: Any) -> str:
@@ -50,15 +34,6 @@ def _split_sentences(text: str) -> List[str]:
     return [chunk.strip() for chunk in chunks if chunk and chunk.strip()]
 
 
-def _normalize_sentiment_label(label: str) -> str:
-    normalized = (label or "").upper()
-    if "1" in normalized or "2" in normalized or "NEG" in normalized:
-        return "NEGATIVE"
-    if "3" in normalized or "NEU" in normalized:
-        return "NEUTRAL"
-    return "POSITIVE"
-
-
 def _pick_entity_bucket(entity_group: str, text: str) -> str:
     entity_group = (entity_group or "").upper()
     lowered_text = (text or "").lower()
@@ -71,92 +46,6 @@ def _pick_entity_bucket(entity_group: str, text: str) -> str:
     if any(word in lowered_text for word in ["material", "cotton", "polyester", "leather", "plastic"]):
         return "entity_mrl"
     return "entity_col"
-
-
-def _load_ner_pipeline():
-    global _NER_PIPELINE
-    if _NER_PIPELINE is not None:
-        return _NER_PIPELINE
-    try:
-        transformers_module = importlib.import_module("transformers")
-        pipeline = transformers_module.pipeline
-
-        _NER_PIPELINE = pipeline(
-            "token-classification",
-            model=NER_MODEL_NAME,
-            aggregation_strategy="simple",
-        )
-    except Exception:
-        _NER_PIPELINE = None
-    return _NER_PIPELINE
-
-
-def _load_sentiment_pipeline():
-    global _SENTIMENT_PIPELINE
-    if _SENTIMENT_PIPELINE is not None:
-        return _SENTIMENT_PIPELINE
-    try:
-        transformers_module = importlib.import_module("transformers")
-        pipeline = transformers_module.pipeline
-
-        _SENTIMENT_PIPELINE = pipeline(
-            "sentiment-analysis",
-            model=SENTIMENT_MODEL_NAME,
-        )
-    except Exception:
-        _SENTIMENT_PIPELINE = None
-    return _SENTIMENT_PIPELINE
-
-
-async def _call_apify_actor(actor_id: str, payload: Dict[str, Any]) -> List[Dict[str, Any]]:
-    await asyncio.sleep(0)
-
-    token = os.getenv("APIFY_API_TOKEN")
-    if not token:
-        return []
-
-    request_payload = json.dumps(payload).encode("utf-8")
-    url = f"https://api.apify.com/v2/acts/{actor_id}/run-sync-get-dataset-items?token={token}"
-
-    def _request() -> List[Dict[str, Any]]:
-        import urllib.request
-
-        request = urllib.request.Request(
-            url,
-            data=request_payload,
-            headers={"Content-Type": "application/json"},
-            method="POST",
-        )
-        with urllib.request.urlopen(request, timeout=120) as response:
-            raw = response.read().decode("utf-8")
-        data = json.loads(raw)
-        return data if isinstance(data, list) else []
-
-    try:
-        return await asyncio.to_thread(_request)
-    except Exception:
-        return []
-
-
-def _build_product_payload(analys: AnalysProduct) -> Dict[str, Any]:
-    search_term = analys.product_name or analys.description or analys.category or "amazon"
-    return {
-        "searchTerms": [search_term],
-        "maxItems": 10,
-        "scrapeReviews": True,
-        "sortBy": "relevance",
-        "language": "en",
-    }
-
-
-def _build_review_payload(product: Product) -> Dict[str, Any]:
-    return {
-        "asin": product.asin,
-        "productUrls": [product.product_url] if product.product_url else [],
-        "maxReviews": 25,
-        "sortBy": "recent",
-        "proxyConfiguration": {"useApifyProxy": True},
-    }
 
 
 def _map_product_row(raw_product: Dict[str, Any], analys: AnalysProduct, user_id: int) -> Product:
@@ -245,7 +134,7 @@ async def _create_scrape_job(analys: AnalysProduct, db: Session) -> ScrapeJob:
 
 async def _scrape_products(job: ScrapeJob, analys: AnalysProduct) -> List[Dict[str, Any]]:
     await asyncio.sleep(0)
-    items = await _call_apify_actor(APIFY_DEFAULT_PRODUCTS_ACTOR, _build_product_payload(analys))
+    items = await scrape_amazon_products(analys.product_name or analys.description, analys.category)
     job.total_product = len(items)
     job.processed = len(items)
     return items
@@ -299,7 +188,7 @@ async def _scrape_reviews(product_jobs: List[ScrapeJob], products: List[Product]
     await asyncio.sleep(0)
     review_rows: List[Dict[str, Any]] = []
     for index, product in enumerate(products):
-        raw_items = await _call_apify_actor(APIFY_DEFAULT_REVIEWS_ACTOR, _build_review_payload(product))
+        raw_items = await scrape_amazon_reviews(product.asin, product.product_url)
         if not raw_items:
             review_rows.append(
                 {
@@ -399,43 +288,16 @@ async def _create_sentence_rows(reviews: List[Review], db: Session) -> List[Sent
 
 async def _run_ner_sentiment(sentences: List[Sentence], db: Session) -> None:
     await asyncio.sleep(0)
-    ner_pipeline = _load_ner_pipeline()
-    sentiment_pipeline = _load_sentiment_pipeline()
-
     for sentence in sentences:
-        ner_entities = []
-        sentiment_label = None
-        sentiment_score = None
-
-        if ner_pipeline is not None:
-            try:
-                ner_entities = ner_pipeline(sentence.text)
-            except Exception:
-                ner_entities = []
-
-        if sentiment_pipeline is not None:
-            try:
-                sentiment_payload = sentiment_pipeline(sentence.text)
-                if isinstance(sentiment_payload, list) and sentiment_payload:
-                    sentiment_payload = sentiment_payload[0]
-                if isinstance(sentiment_payload, dict):
-                    sentiment_label = _normalize_sentiment_label(str(sentiment_payload.get("label", "")))
-                    score = sentiment_payload.get("score")
-                    sentiment_score = float(score) if score is not None else None
-            except Exception:
-                sentiment_label = None
-                sentiment_score = None
-
-        if sentiment_label is None:
-            sentiment_label = "NEUTRAL"
+        ner_entities = extract_ner_entities(sentence.text)
+        sentiment_label, sentiment_score = analyze_review_sentiment(sentence.text)
 
         sentence.sentiment_label = sentiment_label
         sentence.sentiment_score = sentiment_score
 
-        if ner_entities:
-            for entity in ner_entities:
-                bucket = _pick_entity_bucket(str(entity.get("entity_group") or entity.get("entity") or ""), sentence.text)
-                setattr(sentence, bucket, entity.get("word"))
+        for field_name, value in ner_entities.items():
+            if value:
+                setattr(sentence, field_name, value)
 
         db.add(sentence)
 
