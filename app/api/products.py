@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException
 from sqlalchemy.orm import Session
 from typing import List
 from app.core.database import get_db
@@ -20,10 +20,16 @@ router = APIRouter(prefix="/api/analys_products", tags=["Products"])
 @router.post("/", response_model=AnalysProductResponse)
 async def create_analys_product(
     data: AnalysProductCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    return analysis_service.create_product_analys(data, current_user.id, db)
+    return analysis_service.create_product_analys(
+        data,
+        current_user.id,
+        db,
+        background_tasks,
+    )
 
 
 @router.get("/", response_model=List[AnalysProductResponse])
